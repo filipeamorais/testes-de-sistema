@@ -12,13 +12,19 @@ public class UsuariosSystemTest {
 	
 	private FirefoxDriver driver;
 	private UsuariosPage usuarios;
+	private AlteraUsuarioPage altera;
 	
 	@Before
 	public void inicializa() {
 		// por ser uma nova versão preciso setar o webdrive
-		System.setProperty("webdriver.gecko.driver", "C:\\Users\\afilipem\\Documents\\Instaladores\\Selenium\\geckodriver-v0.19.1-win64\\geckodriver.exe");
+		System.setProperty("webdriver.firefox.marionette", "C:\\Users\\12129\\OneDrive - Underwriters Laboratories\\11.Test Automation\\Selinium\\geckodriver-v0.19.1-win64\\geckodriver.exe");
+		// System.setProperty("webdriver.gecko.driver", "C:\\Users\\afilipem\\Documents\\Instaladores\\Selenium\\geckodriver-v0.19.1-win64\\geckodriver.exe");
 		driver = new FirefoxDriver();
 		this.usuarios = new UsuariosPage(driver);
+		this.altera = new AlteraUsuarioPage(driver);
+		
+		usuarios.visita();
+		driver.get("http://localhost:8080/apenas-teste/limpa");
 	}
 
 	@After
@@ -64,7 +70,7 @@ public class UsuariosSystemTest {
 		
 		//driver.close();
 		Nova Implentação 26/11/17*/
-		usuarios.visita();
+		//usuarios.visita();
 		usuarios.novo().cadastra("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br");
 		assertTrue (usuarios.existeNaListagem("Ronaldo Luiz de Albuquerque", "ronaldo2009@terra.com.br"));
 	}
@@ -96,7 +102,7 @@ public class UsuariosSystemTest {
 		
 		//driver.close();
 		Nova implementação 26/11/17*/
-		usuarios.visita();
+		//usuarios.visita();
 		NovoUsuarioPage form = usuarios.novo();
 		form.cadastra("", "ronaldo2009@terra.com.br");
 		assertTrue(form.validacaoDeNomeObrigatorio());
@@ -149,10 +155,23 @@ public class UsuariosSystemTest {
 	public void excluirUmUsuario() {
 		// adicionando um usuario qualquer
 		
-		usuarios.visita();
+		//usuarios.visita();
 		usuarios.novo().cadastra("Ronaldo Luiz de Albuquerque1", "ronaldo2009@terra.com.br1");
 		usuarios.deletaUsuarioNaPosicao(1);
 		
 		assertFalse(usuarios.existeNaListagem("Ronaldo Luiz de Albuquerque1", "ronaldo2009@terra.com.br1"));
+	}
+	
+	@Test
+	public void editarUmUsuario() {
+		// editando um usuario
+		
+		// usuarios.visita();
+		usuarios.novo().cadastra("Ronaldo Luiz de Albuquerque1", "ronaldo2009@terra.com.br1");
+		usuarios.altera(1).para("José da Silva", "jose@silva.com");
+		
+		assertFalse (usuarios.existeNaListagem("Ronaldo Luiz de Albuquerque1", "ronaldo2009@terra.com.br1"));
+		assertTrue (usuarios.existeNaListagem("José da Silva", "jose@silva.com"));
+		
 	}
 }

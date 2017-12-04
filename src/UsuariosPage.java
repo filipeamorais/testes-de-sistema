@@ -28,9 +28,16 @@ class UsuariosPage{
 	
 	public void deletaUsuarioNaPosicao(int posicao) {
 		driver.findElements(By.tagName("button")).get(posicao-1).click();
+		
 		// pega o alert do JavaScript que está aberto
 		Alert alert = driver.switchTo().alert();
+		
 		// confirma o JavaScript
 		alert.accept();
+	}
+	
+	public AlteraUsuarioPage altera (int posicao) {
+		driver.findElements(By.linkText("editar")).get(posicao-1).click();		
+		return new AlteraUsuarioPage (driver);
 	}
 }

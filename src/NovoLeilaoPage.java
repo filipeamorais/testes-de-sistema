@@ -1,3 +1,4 @@
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,11 +13,11 @@ public class NovoLeilaoPage {
 	}
 
 	public void preenche (String nome, double valor, String usuario, boolean usado) {
-	WebElement nome1 = driver.findElement(By.name("leilao.nome"));
-	WebElement valor1 = driver.findElement(By.name("leilao.valorInicial"));
+	WebElement txtNome = driver.findElement(By.name("leilao.nome"));
+	WebElement txtValor = driver.findElement(By.name("leilao.valorInicial"));
 	
-	nome1.sendKeys(nome);
-	valor1.sendKeys(String.valueOf(valor));
+	txtNome.sendKeys(nome);
+	txtValor.sendKeys(String.valueOf(valor));
 	
 	WebElement combo = driver.findElement(By.name("leilao.usuario.id"));
     Select cbUsuario = new Select(combo);
@@ -27,7 +28,7 @@ public class NovoLeilaoPage {
         ckUsado.click();
     }
 
-    nome1.submit();
+    txtNome.submit();
 	
 	}
 	
