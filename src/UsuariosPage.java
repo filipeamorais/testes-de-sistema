@@ -1,6 +1,9 @@
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 class UsuariosPage{
 	
@@ -34,6 +37,16 @@ class UsuariosPage{
 		
 		// confirma o JavaScript
 		alert.accept();
+		
+		// Foi necessario criar esse thread sleep para dar tempo de excluir
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		//driver.findElement(By.xpath("//button[contains(.,'excluir')]")).click();
 	}
 	
 	public AlteraUsuarioPage altera (int posicao) {

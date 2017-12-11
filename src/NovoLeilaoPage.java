@@ -1,4 +1,4 @@
-
+ 	
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +28,7 @@ public class NovoLeilaoPage {
         ckUsado.click();
     }
 
-    txtNome.submit();
+    driver.findElement(By.xpath("//button[contains(.,'Salvar!')]")).click();
 	
 	}
 	

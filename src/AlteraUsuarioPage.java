@@ -20,7 +20,8 @@ public class AlteraUsuarioPage {
         txtNome.sendKeys(nome);
         txtEmail.sendKeys(email);
 
-        txtNome.submit();
+        // txtNome.submit(); Não funciona, tem que ser o botão salvar
+        driver.findElement(By.id("btnSalvar")).click();
         return new UsuariosPage(driver);
     }
 	
