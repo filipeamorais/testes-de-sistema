@@ -1,5 +1,8 @@
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 class LeiloesPage {
 
@@ -10,7 +13,14 @@ class LeiloesPage {
 	    }
 
 	    public void visita() {
-	        driver.get("http://localhost:8080/leiloes");
+	        driver.get(new URLDaAplicacao().getUrlBase() + "/leiloes");
+	    }
+	    
+	    public DetalhesDoLeilaoPage detalhes(int posicao) {
+	        List<WebElement> elementos = driver.findElements(By.linkText("exibir"));
+	        elementos.get(posicao - 1).click();
+
+	        return new DetalhesDoLeilaoPage(driver);
 	    }
 
 	    public NovoLeilaoPage novo() {
